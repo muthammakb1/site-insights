@@ -1,0 +1,9 @@
+// Convert px to rem relative to a 16 px base
+@function rem($px) {
+  @return #{$px / 16}rem;
+}
+
+// Clamp a value between min and max
+@function clamp-val($value, $min, $max) {
+  @return max(#{$min}, min(#{$value}, #{$max}));
+}

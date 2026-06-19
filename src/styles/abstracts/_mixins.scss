@@ -1,0 +1,71 @@
+﻿@use 'variables' as *;
+@use 'sass:color';
+
+// Flex helpers
+@mixin flex($direction: row, $align: center, $justify: flex-start, $gap: 0) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: $align;
+  justify-content: $justify;
+  @if $gap != 0 { gap: $gap; }
+}
+
+// Responsive breakpoints
+@mixin breakpoint($bp) {
+  @if      $bp == 'sm'  { @media (min-width: 640px)  { @content; } }
+  @else if $bp == 'md'  { @media (min-width: 768px)  { @content; } }
+  @else if $bp == 'lg'  { @media (min-width: 1024px) { @content; } }
+  @else if $bp == 'xl'  { @media (min-width: 1280px) { @content; } }
+  @else if $bp == '2xl' { @media (min-width: 1536px) { @content; } }
+}
+
+// Truncate text
+@mixin truncate {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+// Card surface — white card on light page
+@mixin card-surface {
+  background-color: $bg-card;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  box-shadow: $shadow-md;
+}
+
+// Focus ring
+@mixin focus-ring {
+  outline: 2px solid $si-primary-700;
+  outline-offset: 2px;
+}
+
+// Visually hidden (accessible)
+@mixin sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+// Loading shimmer — light-mode version
+@mixin shimmer {
+  background: linear-gradient(
+    90deg,
+    $si-gray-100 25%,
+    $si-gray-50   50%,
+    $si-gray-100  75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+
+  @keyframes shimmer {
+    0%   { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+}

@@ -1,0 +1,43 @@
+﻿@use '../../styles/abstracts/variables' as *;
+@use '../../styles/abstracts/mixins' as *;
+
+.data-table-wrap {
+  overflow-x: auto;
+  border-radius: $radius-sm;
+  border: 1px solid $color-border;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: $font-size-table;   // 13px — table content
+
+  &__caption { @include sr-only; }
+
+  &__head { background-color: $si-gray-50; }
+
+  &__th {
+    padding: $space-2 $space-3;
+    text-align: left;
+    font-weight: $font-weight-semibold;
+    font-size: $font-size-xs;
+    color: $color-text-secondary;
+    white-space: nowrap;
+    border-bottom: 1px solid $color-border;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  &__row {
+    border-bottom: 1px solid $color-border;
+    transition: background-color $transition-fast;
+    &:last-child { border-bottom: none; }
+    &:hover { background-color: $bg-hover; }
+  }
+
+  &__td {
+    padding: $space-2 $space-3;
+    color: $color-text-primary;
+    vertical-align: middle;
+  }
+}

@@ -1,0 +1,31 @@
+@use '../abstracts/variables' as *;
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-tight;
+  color: $color-text-primary;
+}
+
+h1 { font-size: $font-size-page; }     // 28px — page heading
+h2 { font-size: $font-size-section; }  // 18px — section heading
+h3 { font-size: $font-size-sm; }       // 14px — card title
+h4 { font-size: $font-size-sm; }
+h5 { font-size: $font-size-table; }
+h6 { font-size: $font-size-nav; }
+
+p {
+  color: $color-text-secondary;
+  line-height: $line-height-base;
+}
+
+.text-muted   { color: $color-text-muted; }
+.text-success { color: $success-500; }
+.text-warning { color: $warning-500; }
+.text-danger  { color: $error-500; }
+.text-info    { color: $info-500; }
+
+code,
+pre {
+  font-family: $font-family-mono;
+  font-size: $font-size-xs;
+}

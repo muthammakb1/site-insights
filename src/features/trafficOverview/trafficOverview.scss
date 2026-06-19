@@ -1,0 +1,84 @@
+﻿@use '../../styles/abstracts/variables' as *;
+@use '../../styles/abstracts/mixins' as *;
+
+.traffic-overview {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+  grid-column: 1 / -1;
+
+  &__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: $space-4;
+
+    @include breakpoint('md') { grid-template-columns: repeat(2, 1fr); }
+  }
+}
+
+// ─── KPI stat tile ────────────────────────────────────────────────────────────
+
+.traffic-stat {
+  @include card-surface;
+  @include flex(column, flex-start, flex-start, $space-1);
+  padding: $space-4 $space-5;
+
+  &__label {
+    font-size: $font-size-xs;
+    color: $color-text-secondary;
+    font-weight: $font-weight-medium;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  &__value {
+    font-size: $font-size-kpi;    // 32px — KPI numbers
+    font-weight: $font-weight-bold;
+    color: $color-text-primary;
+    line-height: 1.1;
+  }
+
+  &__change {
+    @include flex(row, center, flex-start, 4px);
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+
+    &--up {
+      color: $success-700;
+      &::before { content: '▲'; font-size: 8px; }
+    }
+    &--down {
+      color: $error-700;
+      &::before { content: '▼'; font-size: 8px; }
+    }
+  }
+}
+
+// ─── Chart tooltip ────────────────────────────────────────────────────────────
+
+.chart-tooltip {
+  @include card-surface;
+  padding: $space-3;
+  font-size: $font-size-xs;
+
+  &__date {
+    color: $color-text-secondary;
+    font-weight: $font-weight-medium;
+    margin-bottom: $space-1;
+    font-size: $font-size-xs;
+  }
+
+  &__row {
+    font-weight: $font-weight-semibold;
+    margin-top: 2px;
+  }
+}
+
+// ─── Shared section heading ───────────────────────────────────────────────────
+
+.section-heading {
+  font-size: $font-size-section;  // 18px — section headings
+  font-weight: $font-weight-semibold;
+  color: $si-primary-900;
+  margin-bottom: $space-1;
+}

@@ -1,0 +1,7 @@
+@use '../../styles/abstracts/variables' as *;
+
+.audience-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}

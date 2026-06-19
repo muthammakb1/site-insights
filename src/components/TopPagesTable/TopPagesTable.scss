@@ -1,0 +1,56 @@
+@use '../../styles/abstracts/variables' as *;
+@use '../../styles/abstracts/mixins' as *;
+
+.top-pages-table {
+  @include card-surface;
+  padding: $space-3;
+
+  &__header {
+    @include flex(row, center, space-between, 0);
+    margin-bottom: $space-3;
+  }
+
+  &__title {
+    font-size: $font-size-section;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+    margin: 0;
+
+    @media (max-width: 1366px) { font-size: $font-size-sm; }
+    @media (max-width: 1280px) { font-size: $font-size-table; }
+  }
+
+  &__view-all {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $si-primary-700;
+    line-height: 1;
+
+    &:hover { color: $si-primary-900; text-decoration: underline; }
+
+    @media (max-width: 1366px) { font-size: $font-size-table; }
+  }
+
+  // ── Pastel header tint ───────────────────────────────────────────────────────
+  .data-table__head { background-color: $bg-selected; }  // #EEF2FF — light lavender
+
+  // ── Table font overrides for small laptops ───────────────────────────────────
+  @media (max-width: 1366px) {
+    .data-table {
+      font-size: $font-size-nav;   // 12px cell text
+      &__th { font-size: 10px; padding: $space-1 $space-2; }
+      &__td { padding: $space-1 $space-2; }
+    }
+  }
+
+  @media (max-width: 1280px) {
+    .data-table {
+      font-size: 11px;
+      &__th { font-size: 9px; }
+    }
+  }
+}

@@ -1,0 +1,82 @@
+@use '../../styles/abstracts/variables' as *;
+@use '../../styles/abstracts/mixins' as *;
+
+.donut-chart-card {
+  @include card-surface;
+  padding: $space-3;
+
+  &__title-row {
+    @include flex(row, center, flex-start, $space-2);
+    margin-bottom: $space-2;
+  }
+
+  &__title {
+    font-size: $font-size-section;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+    margin: 0;
+
+    @media (max-width: 1366px) { font-size: $font-size-sm; }    // 14px
+    @media (max-width: 1280px) { font-size: $font-size-table; } // 13px
+  }
+
+  &__info-icon {
+    color: $color-text-muted;
+    flex-shrink: 0;
+  }
+
+  &__body {
+    @include flex(row, center, flex-start, $space-4);
+  }
+
+  &__chart-wrap {
+    flex-shrink: 0;
+  }
+
+  &__legend {
+    flex: 1;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: $space-2;
+  }
+
+  &__legend-item {
+    @include flex(row, center, flex-start, $space-3);
+  }
+
+  &__legend-dot {
+    width: 10px;
+    height: 10px;
+    min-width: 10px;
+    border-radius: $radius-full;
+    flex-shrink: 0;
+  }
+
+  &__legend-name {
+    flex: 1;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $color-text-primary;
+
+    @media (max-width: 1366px) { font-size: $font-size-table; }  // 13px
+    @media (max-width: 1280px) { font-size: $font-size-nav; }    // 12px
+  }
+
+  &__legend-stat {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+    white-space: nowrap;
+
+    @media (max-width: 1366px) { font-size: $font-size-table; }
+    @media (max-width: 1280px) { font-size: $font-size-nav; }
+  }
+
+  &__legend-visits {
+    font-weight: $font-weight-regular;
+    color: $color-text-secondary;
+  }
+}

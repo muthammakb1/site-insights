@@ -1,0 +1,159 @@
+@use '../styles/abstracts/variables' as *;
+@use '../styles/abstracts/mixins' as *;
+
+$sidebar-collapsed-width: 64px;
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: $sidebar-width;           // 240px
+  height: 100vh;
+  background-color: $bg-sidebar;   // #000f45
+  display: flex;
+  flex-direction: column;
+  z-index: 50;
+  overflow: visible;               // notch overflows the edge
+  transition: width $transition-normal;
+
+  // ── Collapsed state ─────────────────────────────────────────────────────────
+  &--collapsed {
+    width: $sidebar-collapsed-width;
+
+    .sidebar__nav-item {
+      justify-content: center;
+      padding: 9px 0;
+    }
+
+    .sidebar__brand {
+      justify-content: center;
+      padding: 0;
+    }
+  }
+
+  // ── Brand ───────────────────────────────────────────────────────────────────
+  &__brand {
+    @include flex(row, center, flex-start, $space-2);
+    padding: 0 $space-4;
+    height: $header-height;
+    flex-shrink: 0;
+    border-bottom: 1px solid rgba(#fff, 0.07);
+    overflow: hidden;
+    transition: padding $transition-normal;
+  }
+
+  &__logo-placeholder {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    border-radius: $radius-full;
+    background: linear-gradient(135deg, #FF5E1A 0%, #FF9F40 100%);
+  }
+
+  &__brand-name {
+    font-size: $font-size-base;
+    font-weight: $font-weight-bold;
+    color: #fff;
+    white-space: nowrap;
+  }
+
+  // ── Scrollable nav ──────────────────────────────────────────────────────────
+  &__nav {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: $space-2 $space-2 $space-4;
+
+    scrollbar-width: thin;
+    scrollbar-color: rgba(#fff, 0.15) transparent;
+    &::-webkit-scrollbar       { width: 4px; }
+    &::-webkit-scrollbar-track { background: transparent; }
+    &::-webkit-scrollbar-thumb { background: rgba(#fff, 0.15); border-radius: $radius-full; }
+  }
+
+  // ── Nav item ────────────────────────────────────────────────────────────────
+  &__nav-item {
+    @include flex(row, center, flex-start, $space-3);
+    width: 100%;
+    padding: 9px $space-3;
+    background: none;
+    border: none;
+    border-radius: $radius-sm;
+    font-size: $font-size-nav;
+    font-weight: $font-weight-medium;
+    color: #fff;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color $transition-fast, padding $transition-normal, justify-content $transition-normal;
+    white-space: nowrap;
+
+    &:hover:not(&--active) { background-color: rgba(#fff, 0.08); }
+
+    &--active {
+      background-color: $si-primary-700;  // #3524c7
+      font-weight: $font-weight-semibold;
+
+      .sidebar__nav-icon { opacity: 1; }
+    }
+  }
+
+  // ── Icon ────────────────────────────────────────────────────────────────────
+  &__nav-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    min-width: 18px;
+    flex-shrink: 0;
+    opacity: 0.85;
+    color: #fff;
+
+    svg { display: block; }
+  }
+
+  // ── Label ───────────────────────────────────────────────────────────────────
+  &__nav-label {
+    color: #fff;
+    line-height: $line-height-tight;
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  // ── Footer ──────────────────────────────────────────────────────────────────
+  &__footer {
+    flex-shrink: 0;
+    padding: $space-2 $space-2 $space-3;
+    border-top: 1px solid rgba(#fff, 0.07);
+  }
+
+  &__nav-item--logout {
+    opacity: 0.7;
+    &:hover { opacity: 1; background-color: rgba(#fff, 0.08); }
+  }
+
+  // ── Collapse notch ──────────────────────────────────────────────────────────
+  &__notch {
+    position: absolute;
+    top: 50%;
+    right: -14px;                  // half overflows sidebar edge
+    transform: translateY(-50%);
+    width: 28px;
+    height: 28px;
+    border-radius: $radius-full;
+    background-color: $bg-card;
+    border: 1.5px solid $color-border;
+    box-shadow: $shadow-md;
+    @include flex(row, center, center, 0);
+    cursor: pointer;
+    color: $color-text-secondary;
+    z-index: 60;
+    transition: background-color $transition-fast, color $transition-fast, box-shadow $transition-fast;
+
+    &:hover {
+      background-color: $bg-hover;
+      color: $si-primary-700;
+      box-shadow: $shadow-lg;
+    }
+  }
+}

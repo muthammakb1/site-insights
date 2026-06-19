@@ -1,0 +1,34 @@
+﻿@use '../../styles/abstracts/variables' as *;
+@use '../../styles/abstracts/mixins' as *;
+
+.conversion-funnel {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+
+  &__kpis {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $space-3;
+  }
+}
+
+.conversion-kpi {
+  @include card-surface;
+  @include flex(column, flex-start, flex-start, $space-1);
+  padding: $space-3 $space-4;
+
+  &__label {
+    font-size: $font-size-xs;
+    color: $color-text-secondary;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: $font-weight-medium;
+  }
+
+  &__value {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    color: $si-primary-900;
+  }
+}

@@ -1,0 +1,36 @@
+@use '../../styles/abstracts/variables' as *;
+@use '../../styles/abstracts/mixins' as *;
+@use 'sass:color';
+
+.error-boundary {
+  @include flex(column, center, center, $space-3);
+  padding: $space-6;
+  background-color: $error-50;
+  border: 1px solid color.adjust($error-500, $lightness: 20%);
+  border-radius: $radius-md;
+  text-align: center;
+
+  &__icon {
+    font-size: $font-size-2xl;
+    color: $error-500;
+  }
+
+  &__message {
+    color: $color-text-secondary;
+    font-size: $font-size-sm;
+  }
+
+  &__retry {
+    margin-top: $space-2;
+    padding: $space-2 $space-4;
+    background-color: $error-500;
+    color: #fff;
+    border-radius: $radius-sm;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    cursor: pointer;
+    transition: background-color $transition-fast;
+
+    &:hover { background-color: $error-700; }
+  }
+}

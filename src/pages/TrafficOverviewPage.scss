@@ -1,0 +1,17 @@
+@use '../styles/abstracts/variables' as *;
+
+.traffic-overview__charts {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-5;
+  align-items: start;
+}
+
+.traffic-overview__bottom {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-5;
+  align-items: stretch;
+}

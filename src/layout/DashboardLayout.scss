@@ -1,0 +1,33 @@
+@use '../styles/abstracts/variables' as *;
+
+$sidebar-collapsed-width: 64px;
+
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: $bg-page;
+
+  &__main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-left: $sidebar-width;         // 240px
+    min-width: 0;
+    transition: margin-left $transition-normal;
+  }
+
+  // Collapsed sidebar — shrink the main offset to match
+  &--sidebar-collapsed &__main {
+    margin-left: $sidebar-collapsed-width;  // 64px
+  }
+
+  &__content {
+    flex: 1;
+    padding: $space-4 $space-6 $space-6;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+    column-gap: $space-5;
+    row-gap: $space-3;
+    align-items: start;
+  }
+}

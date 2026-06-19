@@ -1,0 +1,56 @@
+﻿@use '../../styles/abstracts/variables' as *;
+@use '../../styles/abstracts/mixins' as *;
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+
+  &__trigger {
+    @include flex(row, center, space-between, $space-2);
+    padding: $space-2 $space-3;
+    background-color: $bg-card;
+    border: 1px solid $color-border;
+    border-radius: $radius-sm;
+    font-size: $font-size-xs;
+    color: $color-text-primary;
+    min-width: 148px;
+    transition: border-color $transition-fast, box-shadow $transition-fast;
+
+    &:hover,
+    .dropdown--open & {
+      border-color: $si-primary-700;
+      box-shadow: 0 0 0 3px rgba($si-primary-700, 0.12);
+    }
+  }
+
+  &__caret {
+    font-size: 10px;
+    color: $color-text-muted;
+    transition: transform $transition-fast;
+    .dropdown--open & { transform: rotate(180deg); }
+  }
+
+  &__menu {
+    position: absolute;
+    top: calc(100% + $space-1);
+    left: 0;
+    z-index: 100;
+    min-width: 100%;
+    background-color: $bg-card;
+    border: 1px solid $color-border;
+    border-radius: $radius-sm;
+    box-shadow: $shadow-md;
+    overflow: hidden;
+  }
+
+  &__item {
+    padding: $space-2 $space-3;
+    font-size: $font-size-xs;
+    color: $color-text-secondary;
+    cursor: pointer;
+    transition: background-color $transition-fast, color $transition-fast;
+
+    &:hover        { background-color: $bg-hover; color: $si-primary-700; }
+    &--active      { background-color: $bg-selected; color: $si-primary-700; font-weight: $font-weight-semibold; }
+  }
+}

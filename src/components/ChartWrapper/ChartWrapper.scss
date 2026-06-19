@@ -1,0 +1,18 @@
+﻿@use '../../styles/abstracts/variables' as *;
+@use '../../styles/abstracts/mixins' as *;
+
+.chart-wrapper {
+  width: 100%;
+  position: relative;
+
+  &--error {
+    @include flex(column, center, center, $space-2);
+    background-color: $error-50;
+    border: 1px solid $si-gray-200;
+    border-radius: $radius-sm;
+    text-align: center;
+  }
+
+  &__error-icon { font-size: $font-size-xl; color: $error-500; }
+  &__error-msg  { font-size: $font-size-xs; color: $color-text-secondary; }
+}

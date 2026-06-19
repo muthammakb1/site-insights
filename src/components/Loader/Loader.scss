@@ -1,0 +1,20 @@
+﻿@use '../../styles/abstracts/variables' as *;
+@use '../../styles/abstracts/mixins' as *;
+
+.loader-shimmer {
+  @include shimmer;
+  border-radius: $radius-sm;
+  width: 100%;
+}
+
+.spinner {
+  display: inline-block;
+  border: 2px solid $si-gray-200;
+  border-top-color: $si-primary-700;
+  border-radius: $radius-full;
+  animation: spin 0.65s linear infinite;
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+}

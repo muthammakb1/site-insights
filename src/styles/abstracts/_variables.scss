@@ -1,0 +1,205 @@
+﻿// ─── Primary Brand (Site Insights navy/blue) ───────────────────────────────────
+$si-primary-900: #0A1E6A;
+$si-primary-800: #1A2F8A;
+$si-primary-700: #3524c7;
+$si-primary-600: #5B6CFF;
+$si-primary-500: #7A88FF;
+
+// ─── Secondary accents ────────────────────────────────────────────────────────
+$si-pink-500:   #FF5BA6;
+$si-orange-500: #FF9F40;
+$si-teal-500:   #1CB5B2;
+$si-green-500:  #34C759;
+$si-blue-500:   #3B82F6;
+
+// ─── Neutral scale ────────────────────────────────────────────────────────────
+$si-gray-50:  #FAFBFC;
+$si-gray-100: #F5F7FA;
+$si-gray-200: #E9EDF3;
+$si-gray-300: #D7DDE8;
+$si-gray-400: #AAB4C5;
+$si-gray-500: #7B8794;
+$si-gray-600: #5B6677;
+$si-gray-700: #3B4556;
+$si-gray-800: #232B38;
+$si-gray-900: #111827;
+
+// ─── Semantic ─────────────────────────────────────────────────────────────────
+$success-50:  #EAFBF0;
+$success-500: #22C55E;
+$success-700: #15803D;
+
+$warning-50:  #FFF7E6;
+$warning-500: #F59E0B;
+$warning-700: #B45309;
+
+$error-50:  #FEF2F2;
+$error-500: #EF4444;
+$error-700: #B91C1C;
+
+$info-50:  #EFF6FF;
+$info-500: #3B82F6;
+$info-700: #1D4ED8;
+
+// ─── Backgrounds ──────────────────────────────────────────────────────────────
+$bg-page:     #F8FAFC;
+$bg-card:     #FFFFFF;
+$bg-sidebar:  #000f45;
+$bg-hover:    #F2F5FF;
+$bg-selected: #EEF2FF;
+
+// ─── Aliases used throughout the system ──────────────────────────────────────
+$color-primary:        $si-primary-900;
+$color-primary-active: $si-primary-700;
+$color-primary-light:  $bg-selected;
+
+$color-bg:            $bg-page;
+$color-bg-card:       $bg-card;
+$color-bg-sidebar:    $bg-sidebar;
+$color-bg-hover:      $bg-hover;
+$color-bg-selected:   $bg-selected;
+
+$color-border:        $si-gray-200;
+$color-border-strong: $si-gray-300;
+
+$color-text-primary:   $si-gray-900;
+$color-text-secondary: $si-gray-600;
+$color-text-muted:     $si-gray-400;
+$color-text-on-dark:   #FFFFFF;
+
+$color-success: $success-500;
+$color-warning: $warning-500;
+$color-danger:  $error-500;
+$color-info:    $info-500;
+
+// ─── Chart palette (fixed order — keep consistent across all charts) ──────────
+$chart-1: #3B4DFF;
+$chart-2: #FF5BA6;
+$chart-3: #FF9F40;
+$chart-4: #1CB5B2;
+$chart-5: #34C759;
+$chart-6: #8B5CF6;
+$chart-7: #3B82F6;
+
+// ─── Typography ───────────────────────────────────────────────────────────────
+$font-family-base: 'Inter', sans-serif;
+$font-family-mono: 'JetBrains Mono', 'Cascadia Code', monospace;
+
+//                   Usage
+$font-size-nav:     11px;   // Sidebar menu labels
+$font-size-table:   12px;   // Table content
+$font-size-sm:      13px;   // Card labels, table emphasis
+$font-size-section: 15px;   // Section headings
+$font-size-page:    20px;   // Page / H1 heading
+$font-size-kpi:     24px;   // KPI numbers
+
+// Backward-compat aliases kept so existing component refs don't break
+$font-size-xs:   $font-size-nav;
+$font-size-base: $font-size-sm;
+$font-size-lg:   $font-size-section;
+$font-size-xl:   24px;
+$font-size-2xl:  $font-size-kpi;
+
+$font-weight-regular:  400;
+$font-weight-normal:   400;   // alias
+$font-weight-medium:   500;
+$font-weight-semibold: 600;
+$font-weight-bold:     700;
+
+$line-height-base:  1.5;
+$line-height-tight: 1.25;
+
+// ─── Shape ────────────────────────────────────────────────────────────────────
+$radius-sm: 8px;
+$radius-md: 12px;
+$radius-lg: 16px;
+$radius-xl: 24px;
+$radius-full: 9999px;
+
+// ─── Shadows ──────────────────────────────────────────────────────────────────
+$shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.05);
+$shadow-md: 0 4px 12px rgba(16, 24, 40, 0.08);
+$shadow-lg: 0 12px 24px rgba(16, 24, 40, 0.12);
+
+// ─── Spacing scale (8 px base) ────────────────────────────────────────────────
+$space-1: 4px;
+$space-2: 8px;
+$space-3: 12px;
+$space-4: 16px;
+$space-5: 24px;
+$space-6: 32px;
+$space-7: 48px;
+$space-8: 64px;
+
+// ─── Layout ───────────────────────────────────────────────────────────────────
+$sidebar-width: 240px;
+$header-height: 80px;
+
+// ─── Transitions ──────────────────────────────────────────────────────────────
+$transition-fast:   120ms ease;
+$transition-normal: 200ms ease;
+$transition-slow:   350ms ease;
+
+// ─── CSS custom properties ────────────────────────────────────────────────────
+:root {
+  // Brand
+  --si-primary-900: #{$si-primary-900};
+  --si-primary-800: #{$si-primary-800};
+  --si-primary-700: #{$si-primary-700};
+  --si-primary-600: #{$si-primary-600};
+  --si-primary-500: #{$si-primary-500};
+
+  // Accents
+  --si-pink-500:   #{$si-pink-500};
+  --si-orange-500: #{$si-orange-500};
+  --si-teal-500:   #{$si-teal-500};
+  --si-green-500:  #{$si-green-500};
+  --si-blue-500:   #{$si-blue-500};
+
+  // Chart palette (consumed by Recharts via getComputedStyle)
+  --chart-1: #{$chart-1};
+  --chart-2: #{$chart-2};
+  --chart-3: #{$chart-3};
+  --chart-4: #{$chart-4};
+  --chart-5: #{$chart-5};
+  --chart-6: #{$chart-6};
+  --chart-7: #{$chart-7};
+
+  // Semantic
+  --success-50:  #{$success-50};
+  --success-500: #{$success-500};
+  --success-700: #{$success-700};
+  --warning-50:  #{$warning-50};
+  --warning-500: #{$warning-500};
+  --warning-700: #{$warning-700};
+  --error-50:    #{$error-50};
+  --error-500:   #{$error-500};
+  --error-700:   #{$error-700};
+  --info-50:     #{$info-50};
+  --info-500:    #{$info-500};
+  --info-700:    #{$info-700};
+
+  // Backgrounds
+  --bg-page:     #{$bg-page};
+  --bg-card:     #{$bg-card};
+  --bg-sidebar:  #{$bg-sidebar};
+  --bg-hover:    #{$bg-hover};
+  --bg-selected: #{$bg-selected};
+
+  // Layout
+  --sidebar-width: #{$sidebar-width};
+  --header-height: #{$header-height};
+
+  // Typography
+  --font-family:          #{$font-family-base};
+  --font-size-nav:        #{$font-size-nav};
+  --font-size-table:      #{$font-size-table};
+  --font-size-card-label: #{$font-size-sm};
+  --font-size-section:    #{$font-size-section};
+  --font-size-page:       #{$font-size-page};
+  --font-size-kpi:        #{$font-size-kpi};
+  --font-weight-regular:  #{$font-weight-regular};
+  --font-weight-medium:   #{$font-weight-medium};
+  --font-weight-semibold: #{$font-weight-semibold};
+  --font-weight-bold:     #{$font-weight-bold};
+}

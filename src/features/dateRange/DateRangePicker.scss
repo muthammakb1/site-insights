@@ -1,0 +1,138 @@
+@use '../../styles/abstracts/variables' as *;
+@use '../../styles/abstracts/mixins' as *;
+
+// ── Trigger pill ──────────────────────────────────────────────────────────────
+
+.drp {
+  position: relative;
+  display: inline-block;
+
+  &__trigger {
+    @include flex(row, center, flex-start, $space-2);
+    padding: 5px $space-3;
+    background-color: $bg-card;
+    border: 1px solid $color-border;
+    border-radius: $radius-sm;
+    font-size: $font-size-table;
+    font-weight: $font-weight-medium;
+    color: $color-text-primary;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: border-color $transition-fast, box-shadow $transition-fast;
+
+    &:hover,
+    .drp--open & {
+      border-color: $si-primary-700;
+      box-shadow: 0 0 0 3px rgba($si-primary-700, 0.1);
+    }
+  }
+
+  &__cal-icon {
+    color: $color-text-secondary;
+    flex-shrink: 0;
+  }
+
+  &__label {
+    color: $color-text-primary;
+  }
+
+  &__chevron {
+    color: $color-text-muted;
+    flex-shrink: 0;
+    transition: transform $transition-fast;
+    .drp--open & { transform: rotate(180deg); }
+  }
+
+  // ── Dropdown panel ───────────────────────────────────────────────────────────
+
+  &__panel {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    z-index: 200;
+    background-color: $bg-card;
+    border: 1px solid $color-border;
+    border-radius: $radius-md;
+    box-shadow: $shadow-lg;
+    padding: $space-3;
+    min-width: 220px;
+  }
+
+  // ── Presets list ─────────────────────────────────────────────────────────────
+
+  &__presets {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-bottom: $space-3;
+    padding-bottom: $space-3;
+    border-bottom: 1px solid $color-border;
+  }
+
+  &__preset-btn {
+    width: 100%;
+    text-align: left;
+    padding: 6px $space-3;
+    border-radius: $radius-sm;
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+    transition: background-color $transition-fast, color $transition-fast;
+    cursor: pointer;
+
+    &:hover { background-color: $bg-hover; color: $si-primary-700; }
+  }
+
+  // ── Custom date inputs ───────────────────────────────────────────────────────
+
+  &__custom {
+    @include flex(row, flex-end, flex-start, $space-2);
+  }
+
+  &__sep {
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+    padding-bottom: $space-1;
+  }
+
+  &__field {
+    @include flex(column, flex-start, flex-start, 4px);
+    flex: 1;
+  }
+
+  &__field-label {
+    font-size: $font-size-nav;
+    font-weight: $font-weight-medium;
+    color: $color-text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  &__input {
+    width: 100%;
+    padding: 6px $space-2;
+    background-color: $bg-page;
+    border: 1px solid $color-border;
+    border-radius: $radius-sm;
+    font-size: $font-size-sm;
+    color: $color-text-primary;
+    font-family: $font-family-base;
+    cursor: pointer;            // whole field is clickable
+    transition: border-color $transition-fast;
+
+    // Remove the default text-edit caret — only the picker is allowed
+    caret-color: transparent;
+
+    &:focus {
+      outline: none;
+      border-color: $si-primary-700;
+      box-shadow: 0 0 0 3px rgba($si-primary-700, 0.1);
+    }
+
+    // Chromium: style the calendar icon area
+    &::-webkit-calendar-picker-indicator {
+      cursor: pointer;
+      opacity: 0.6;
+      &:hover { opacity: 1; }
+    }
+  }
+}
