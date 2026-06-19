@@ -5,8 +5,11 @@
   "scripts": {
     "dev": "webpack serve --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
-    "lint": "eslint src --ext .js,.jsx"
+    "lint": "eslint src --ext .js,.jsx",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
+  "homepage": "https://muthammakb1.github.io/site-insights",
   "dependencies": {
     "@reduxjs/toolkit": "^2.3.0",
     "@svg-maps/india": "^2.0.0",
@@ -33,6 +36,7 @@
     "eslint": "^9.16.0",
     "eslint-plugin-react": "^7.37.3",
     "eslint-plugin-react-hooks": "^5.1.0",
+    "gh-pages": "^6.3.0",
     "html-webpack-plugin": "^5.6.3",
     "mini-css-extract-plugin": "^2.9.2",
     "react-refresh": "^0.14.2",
