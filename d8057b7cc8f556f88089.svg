@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 80" preserveAspectRatio="none">
+  <defs>
+    <linearGradient id="spark-fill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#4B3FE4" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#4B3FE4" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <!-- filled area -->
+  <polygon
+    points="0,52 20,38 40,58 65,28 88,36 108,52 128,44 148,56 175,18 200,34 220,32 242,44 262,30 280,46 300,22 300,80 0,80"
+    fill="url(#spark-fill)"
+  />
+  <!-- line -->
+  <polyline
+    points="0,52 20,38 40,58 65,28 88,36 108,52 128,44 148,56 175,18 200,34 220,32 242,44 262,30 280,46 300,22"
+    fill="none"
+    stroke="#4B3FE4"
+    stroke-width="2.5"
+    stroke-linejoin="round"
+    stroke-linecap="round"
+  />
+</svg>
