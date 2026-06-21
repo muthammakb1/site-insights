@@ -1,0 +1,144 @@
+@use '../../styles/abstracts/variables' as *;
+@use '../../styles/abstracts/mixins' as *;
+
+.ai-traffic-card {
+  @include card-surface;
+  padding: $space-3;
+
+  &__header {
+    @include flex(row, center, flex-start, $space-2);
+    margin-bottom: $space-3;
+  }
+
+  &__icon-wrap {
+    @include flex(row, center, center, 0);
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    border-radius: $radius-sm;
+    background-color: #EDE9FE;
+    color: #7C3AED;
+    flex-shrink: 0;
+  }
+
+  &__title {
+    font-size: $font-size-section;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+    margin: 0;
+
+    @media (max-width: 1366px) { font-size: $font-size-sm; }
+  }
+
+  // ── Metrics row ────────────────────────────────────────────────────────────
+  &__metrics {
+    @include flex(row, center, flex-start, 0);
+    background: $bg-selected;
+    border-radius: $radius-sm;
+    padding: $space-1 $space-4;
+    margin-bottom: $space-4;
+  }
+
+  &__metric {
+    flex: 1;
+    @include flex(row, baseline, flex-start, $space-2);
+  }
+
+  &__metric-divider {
+    width: 1px;
+    height: 20px;
+    background: $color-border;
+    margin: 0 $space-4;
+    flex-shrink: 0;
+  }
+
+  &__metric-label {
+    font-size: $font-size-nav;
+    color: $color-text-secondary;
+    font-weight: $font-weight-medium;
+    white-space: nowrap;
+  }
+
+  &__metric-value {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-bold;
+    color: $color-text-primary;
+    line-height: 1;
+  }
+
+  // ── Source table ───────────────────────────────────────────────────────────
+  &__table-head {
+    @include flex(row, center, space-between, 0);
+    padding: $space-1 0 $space-2;
+    border-bottom: 1px solid $color-border;
+    margin-bottom: $space-1;
+    font-size: $font-size-nav;
+    font-weight: $font-weight-semibold;
+    color: $color-text-secondary;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  &__row {
+    @include flex(row, center, flex-start, $space-2);
+    padding: $space-1 0;
+    border-bottom: 1px solid $si-gray-100;
+
+    &:last-child { border-bottom: none; }
+  }
+
+  &__source-info {
+    @include flex(row, center, flex-start, $space-2);
+    width: 100px;
+    flex-shrink: 0;
+  }
+
+  &__icon {
+    display: flex;
+    flex-shrink: 0;
+  }
+
+  &__source-name {
+    font-size: $font-size-table;
+    font-weight: $font-weight-medium;
+    color: $color-text-primary;
+    @include truncate;
+  }
+
+  &__bar-track {
+    flex: 1;
+    height: 6px;
+    background: $si-gray-200;
+    border-radius: $radius-full;
+    overflow: hidden;
+  }
+
+  &__bar-fill {
+    height: 100%;
+    background: $si-primary-700;
+    border-radius: $radius-full;
+    transform-origin: left center;
+    animation: ai-bar-grow 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  }
+
+  @keyframes ai-bar-grow {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+  }
+
+  &__visits {
+    font-size: $font-size-table;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+    width: 38px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 1366px) {
+    .ai-traffic-card__source-name,
+    .ai-traffic-card__visits {
+      font-size: $font-size-nav;
+    }
+  }
+}

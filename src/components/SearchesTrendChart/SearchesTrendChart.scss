@@ -1,0 +1,94 @@
+@use '../../styles/abstracts/variables' as *;
+@use '../../styles/abstracts/mixins' as *;
+
+.searches-trend {
+  @include card-surface;
+  padding: $space-3;
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: $space-2;
+    margin-bottom: $space-3;
+  }
+
+  &__title {
+    font-size: $font-size-section;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+    margin: 0;
+
+    @media (max-width: 1366px) { font-size: $font-size-sm; }
+    @media (max-width: 1280px) { font-size: $font-size-table; }
+  }
+
+  &__legend {
+    @include flex(row, center, flex-start, $space-3);
+  }
+
+  &__legend-item {
+    @include flex(row, center, flex-start, $space-2);
+    white-space: nowrap;
+  }
+
+  // Horizontal line with a centred coloured dot — mirrors the chart series marker
+  &__legend-line {
+    position: relative;
+    width: 24px;
+    height: 2px;
+    background-color: $si-gray-400;
+    flex-shrink: 0;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 8px;
+      height: 8px;
+      border-radius: $radius-full;
+      background-color: var(--dot-color);
+      border: 1.5px solid #fff;
+      box-shadow: 0 0 0 1px var(--dot-color);
+    }
+  }
+
+  &__legend-label {
+    font-size: $font-size-nav;
+    color: $color-text-secondary;
+    font-weight: $font-weight-medium;
+
+    @media (max-width: 1366px) { font-size: 10px; }
+  }
+
+  // Reduced by ~22px vs table breakpoints to compensate for the 2-line header
+  &__chart-area {
+    height: 188px;
+
+    @media (max-width: 1366px) { height: 132px; }
+    @media (max-width: 1280px) { height: 131px; }
+  }
+
+  &__tooltip {
+    background: $bg-card;
+    border: 1px solid $color-border;
+    border-radius: $radius-sm;
+    padding: $space-2 $space-3;
+    box-shadow: $shadow-md;
+  }
+
+  &__tooltip-month {
+    font-size: $font-size-nav;
+    font-weight: $font-weight-semibold;
+    color: $color-text-secondary;
+    margin: 0 0 2px;
+  }
+
+  &__tooltip-val {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+    margin: 0;
+  }
+}

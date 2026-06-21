@@ -1,4 +1,4 @@
-import { Users, User, UserRoundPlus, RefreshCcw, FileText, Clock3 } from 'lucide-react';
+import { Users, User, UserRoundPlus, RefreshCcw, FileText, Clock3, Globe } from 'lucide-react';
 import { KpiCard } from '@features/kpiCards/KpiCards';
 import { DonutChartCard } from '@components/DonutChartCard/DonutChartCard';
 import { TopPagesTable } from '@components/TopPagesTable/TopPagesTable';
@@ -30,11 +30,16 @@ const DEVICE_DATA = [
 ];
 
 const TOP_CITIES = [
-  { rank: 1, name: 'Mumbai',    pct: '10.2%', color: '#6C63FF' },
-  { rank: 2, name: 'Bengaluru', pct: '8.9%',  color: '#FF5BA6' },
-  { rank: 3, name: 'Delhi',     pct: '7.6%',  color: '#FF9F40' },
-  { rank: 4, name: 'Pune',      pct: '5.7%',  color: '#1CB5B2' },
-  { rank: 5, name: 'Hyderabad', pct: '5.1%',  color: '#34C759' },
+  { rank: 1,  name: 'Mumbai',    pct: '10.2%', color: '#6C63FF' },
+  { rank: 2,  name: 'Bengaluru', pct: '8.9%',  color: '#FF5BA6' },
+  { rank: 3,  name: 'Delhi',     pct: '7.6%',  color: '#FF9F40' },
+  { rank: 4,  name: 'Pune',      pct: '5.7%',  color: '#1CB5B2' },
+  { rank: 5,  name: 'Hyderabad', pct: '5.1%',  color: '#34C759' },
+  { rank: 6,  name: 'Chennai',   pct: '4.3%',  color: '#8B5CF6' },
+  { rank: 7,  name: 'Kolkata',   pct: '3.8%',  color: '#3B82F6' },
+  { rank: 8,  name: 'Ahmedabad', pct: '3.2%',  color: '#F59E0B' },
+  { rank: 9,  name: 'Jaipur',    pct: '2.9%',  color: '#10B981' },
+  { rank: 10, name: 'Surat',     pct: '2.4%',  color: '#EC4899' },
 ];
 
 const TOP_PAGES_ROWS = [
@@ -43,6 +48,11 @@ const TOP_PAGES_ROWS = [
   { page: '/safe-painting-service',  visits: '430K', pct: '10.0%', bounceRate: '29%' },
   { page: '/products',               visits: '340K', pct: '8.4%',  bounceRate: '27%' },
   { page: '/paint-calculator',       visits: '280K', pct: '6.7%',  bounceRate: '31%' },
+  { page: '/find-a-dealer',          visits: '210K', pct: '5.2%',  bounceRate: '35%' },
+  { page: '/about-us',               visits: '180K', pct: '4.4%',  bounceRate: '40%' },
+  { page: '/careers',                visits: '145K', pct: '3.6%',  bounceRate: '38%' },
+  { page: '/contact-us',             visits: '120K', pct: '2.9%',  bounceRate: '42%' },
+  { page: '/blog',                   visits: '98K',  pct: '2.4%',  bounceRate: '45%' },
 ];
 
 const TOP_PAGES_COLUMNS = [
@@ -67,6 +77,9 @@ export function TrafficOverviewPage() {
       <div className="traffic-overview__bottom">
         <TopPagesTable
           title="Top Landing Pages"
+          Icon={Globe}
+          iconBg="#EFF6FF"
+          iconColor="#2563EB"
           columns={TOP_PAGES_COLUMNS}
           rows={TOP_PAGES_ROWS}
           rowKey="page"

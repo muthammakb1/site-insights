@@ -1,0 +1,17 @@
+@use '../styles/abstracts/variables' as *;
+
+.channel-campaign-geo__tables {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-5;
+  align-items: start;
+}
+
+.channel-campaign-geo__ai-section {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-5;
+  align-items: start;
+}

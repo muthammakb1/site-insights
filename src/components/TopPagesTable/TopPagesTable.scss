@@ -10,6 +10,19 @@
     margin-bottom: $space-3;
   }
 
+  &__title-group {
+    @include flex(row, center, flex-start, $space-2);
+  }
+
+  &__icon-wrap {
+    @include flex(row, center, center, 0);
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    border-radius: $radius-sm;
+    flex-shrink: 0;
+  }
+
   &__title {
     font-size: $font-size-section;
     font-weight: $font-weight-semibold;
@@ -35,8 +48,31 @@
     @media (max-width: 1366px) { font-size: $font-size-table; }
   }
 
-  // ── Pastel header tint ───────────────────────────────────────────────────────
-  .data-table__head { background-color: $bg-selected; }  // #EEF2FF — light lavender
+  // ── Scrollable body, fixed height ───────────────────────────────────────────
+  // max-height = sticky-header-height + 5 × row-height − 1px (last row no border)
+  // Recalculated at each breakpoint because padding/font-size shrink.
+  .data-table-wrap {
+    max-height: 208px;  // >1366px: header 34px + 5×35px − 1 = 208px
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: $si-gray-300 transparent;
+
+    &::-webkit-scrollbar         { width: 4px; }
+    &::-webkit-scrollbar-track   { background: transparent; }
+    &::-webkit-scrollbar-thumb   { background-color: $si-gray-300; border-radius: $radius-full; }
+    &::-webkit-scrollbar-thumb:hover { background-color: $si-gray-400; }
+
+    @media (max-width: 1366px) { max-height: 152px; } // header 23px + 5×26px − 1 = 152px
+    @media (max-width: 1280px) { max-height: 151px; } // header 22px + 5×26px − 1 = 151px
+  }
+
+  // ── Pastel header tint — sticky so it stays visible while scrolling ─────────
+  .data-table__head {
+    background-color: $bg-selected;  // #EEF2FF — light lavender
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
 
   // ── Table font overrides for small laptops ───────────────────────────────────
   @media (max-width: 1366px) {

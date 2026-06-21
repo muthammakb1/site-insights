@@ -29,6 +29,13 @@ const ICON_COLORS = {
   'conversion-rate':    { bg: '#F0FDFA', color: '#0D9488' }, // teal
   'bounce-rate':        { bg: '#FFF1F2', color: '#E11D48' }, // rose
   'avg-engagement':     { bg: '#FDF4FF', color: '#A21CAF' }, // fuchsia
+
+  // Search Insights
+  'total-searches':         { bg: '#EFF6FF', color: '#2563EB' }, // blue
+  'search-start':           { bg: '#FFF7ED', color: '#EA580C' }, // orange
+  'search-conversion-rate': { bg: '#ECFDF5', color: '#059669' }, // emerald
+  'no-search-result':       { bg: '#FFF1F2', color: '#E11D48' }, // rose
+  'search-users':           { bg: '#FFFBEB', color: '#D97706' }, // amber
 };
 
 export function KpiCard({ id, label, value, Icon: IconProp }) {

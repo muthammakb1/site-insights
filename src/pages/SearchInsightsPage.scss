@@ -1,0 +1,9 @@
+@use '../styles/abstracts/variables' as *;
+
+.search-insights__tables {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: $space-5;
+  align-items: start;
+}
