@@ -78,8 +78,8 @@ export function TrafficOverviewPage() {
         <TopPagesTable
           title="Top Landing Pages"
           Icon={Globe}
-          iconBg="#EFF6FF"
-          iconColor="#2563EB"
+          iconBg="#F0FDFA"
+          iconColor="#0D9488"
           columns={TOP_PAGES_COLUMNS}
           rows={TOP_PAGES_ROWS}
           rowKey="page"

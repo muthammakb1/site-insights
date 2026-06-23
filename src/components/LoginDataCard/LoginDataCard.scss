@@ -1,0 +1,115 @@
+@use '../../styles/abstracts/variables' as *;
+@use '../../styles/abstracts/mixins' as *;
+
+.login-data-card {
+  @include card-surface;
+  padding: $space-3;
+
+  &__title-row {
+    @include flex(row, center, flex-start, $space-2);
+    margin-bottom: $space-3;
+  }
+
+  &__title {
+    font-size: $font-size-section;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+    margin: 0;
+  }
+
+  &__info-icon {
+    color: $color-text-muted;
+    flex-shrink: 0;
+  }
+
+  &__body {
+    @include flex(row, center, flex-start, $space-5);
+  }
+
+  &__icon-wrap {
+    @include flex(row, center, center, 0);
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    border-radius: $radius-sm;
+    background-color: #FCE7F3;
+    color: #DB2777;
+    flex-shrink: 0;
+  }
+
+  // ── Left stat column ─────────────────────────────────────────────────────────
+  &__stat {
+    @include flex(column, flex-start, flex-start, $space-2);
+    min-width: 100px;
+  }
+
+  &__stat-label {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $color-text-secondary;
+    margin: 0;
+  }
+
+  &__stat-value {
+    font-size: $font-size-kpi;
+    font-weight: $font-weight-bold;
+    color: $color-text-primary;
+    margin: 0;
+    line-height: 1;
+  }
+
+  // ── Right chart column ───────────────────────────────────────────────────────
+  &__chart-section {
+    flex: 1;
+  }
+
+  &__chart-title {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+    margin: 0 0 $space-2;
+    text-align: center;
+  }
+
+  &__chart-body {
+    @include flex(row, center, flex-start, $space-3);
+  }
+
+  &__chart-wrap {
+    flex-shrink: 0;
+  }
+
+  // ── Legend ───────────────────────────────────────────────────────────────────
+  &__legend {
+    flex: 1;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: $space-2;
+  }
+
+  &__legend-item {
+    @include flex(row, center, flex-start, $space-3);
+  }
+
+  &__legend-dot {
+    width: 10px;
+    height: 10px;
+    min-width: 10px;
+    border-radius: $radius-full;
+    flex-shrink: 0;
+  }
+
+  &__legend-name {
+    flex: 1;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $color-text-primary;
+
+    @media (max-width: 1366px) { font-size: $font-size-table; }
+    @media (max-width: 1280px) { font-size: $font-size-nav; }
+  }
+
+}

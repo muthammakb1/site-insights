@@ -1,0 +1,133 @@
+@use '../../styles/abstracts/variables' as *;
+@use '../../styles/abstracts/mixins' as *;
+
+.user-intent-card {
+  @include card-surface;
+  padding: $space-3;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+
+  // ── Header ────────────────────────────────────────────────────────────────
+  &__title-row {
+    @include flex(row, center, flex-start, $space-2);
+    flex-wrap: wrap;
+  }
+
+  &__title {
+    font-size: $font-size-section;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+    margin: 0;
+  }
+
+  &__info-icon {
+    color: $color-text-muted;
+    flex-shrink: 0;
+  }
+
+  &__legend {
+    margin-left: auto;
+    @include flex(row, center, flex-end, $space-3);
+  }
+
+  &__legend-item {
+    @include flex(row, center, flex-start, $space-1);
+    font-size: $font-size-nav;
+    font-weight: $font-weight-medium;
+    color: $color-text-secondary;
+  }
+
+  &__dot {
+    width: 8px;
+    height: 8px;
+    min-width: 8px;
+    border-radius: $radius-full;
+
+    &--traffic { background-color: #5B6CFF; }
+    &--forms   { background-color: #FF5BA6; }
+  }
+
+  // ── List ──────────────────────────────────────────────────────────────────
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: $space-2;
+    max-height: calc(5 * 54px + 4 * 8px);
+    overflow-y: auto;
+    padding-right: $space-1;
+
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: $si-gray-100;
+      border-radius: $radius-full;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $si-gray-300;
+      border-radius: $radius-full;
+    }
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    align-items: center;
+    gap: $space-2;
+    background-color: $si-gray-50;
+    border: 1px solid $color-border;
+    border-radius: $radius-sm;
+    padding: $space-2 $space-3;
+  }
+
+  &__name {
+    font-size: $font-size-table;
+    font-weight: $font-weight-medium;
+    color: $color-text-primary;
+    @include truncate;
+  }
+
+  // ── Bars ──────────────────────────────────────────────────────────────────
+  &__bars {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__bar-row {
+    @include flex(row, center, flex-start, $space-2);
+  }
+
+  &__bar-track {
+    flex: 1;
+    min-width: 0;
+    height: 7px;
+    position: relative;
+  }
+
+  &__bar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    border-radius: $radius-full;
+    min-width: 4px;
+
+    &--traffic { background-color: #5B6CFF; }
+    &--forms   { background-color: #FF5BA6; }
+  }
+
+  &__value {
+    flex-shrink: 0;
+    width: 36px;
+    font-size: $font-size-nav;
+    font-weight: $font-weight-semibold;
+    color: $color-text-secondary;
+  }
+}
