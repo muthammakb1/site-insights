@@ -1,0 +1,212 @@
+@use '../styles/abstracts/variables' as *;
+@use '../styles/abstracts/mixins' as *;
+
+.calc-page {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-5;
+  align-items: start;
+
+  // Pin submissions column to content width, right-align
+  .data-table__th:last-child,
+  .data-table__td:last-child {
+    width: 1%;
+    white-space: nowrap;
+    text-align: right;
+  }
+}
+
+// ── Conversion Contribution by Journey ────────────────────────────────────────
+.conv-journey {
+  @include card-surface;
+  padding: $space-3;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+
+  &__header {
+    @include flex(row, center, flex-start, $space-2);
+  }
+
+  &__icon-wrap {
+    @include flex(row, center, center, 0);
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    border-radius: $radius-sm;
+    background: #FCE7F3;
+    color: #DB2777;
+    flex-shrink: 0;
+  }
+
+  &__title {
+    font-size: $font-size-section;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+    margin: 0;
+  }
+
+  &__info-icon {
+    color: $color-text-muted;
+  }
+
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: $space-1;
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns: 160px 1fr 36px;
+    align-items: center;
+    gap: $space-3;
+    padding: $space-1 0;
+  }
+
+  &__name {
+    font-size: $font-size-nav;
+    font-weight: $font-weight-medium;
+    color: $color-text-primary;
+    white-space: nowrap;
+  }
+
+  &__bar-track {
+    height: 6px;
+    border-radius: $radius-full;
+    background-color: $si-gray-200;
+    overflow: hidden;
+  }
+
+  &__bar {
+    height: 100%;
+    border-radius: $radius-full;
+    background-color: rgb(99, 102, 241);
+    transform-origin: left center;
+    animation: conv-bar-grow 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  }
+
+  @keyframes conv-bar-grow {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+  }
+
+  &__pct {
+    font-size: $font-size-nav;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+    text-align: right;
+  }
+
+  &__footer {
+    @include flex(row, center, flex-start, $space-3);
+    padding-top: $space-2;
+    border-top: 1px solid $color-border;
+  }
+
+  &__footer-label {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+  }
+
+  &__footer-value {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $si-primary-700;
+  }
+}
+
+// ── Traffic on Mini Forms ─────────────────────────────────────────────────────
+.mini-forms-traffic {
+  @include card-surface;
+  padding: $space-3;
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+
+  &__header {
+    @include flex(row, center, flex-start, $space-2);
+  }
+
+  &__title {
+    font-size: $font-size-section;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+    margin: 0;
+  }
+
+  &__info-icon {
+    color: $color-text-muted;
+  }
+
+  &__body {
+    @include flex(row, center, flex-start, $space-4);
+  }
+
+  &__legend {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: $space-2;
+  }
+
+  &__legend-item {
+    @include flex(row, center, flex-start, $space-2);
+  }
+
+  &__dot {
+    width: 10px;
+    height: 10px;
+    min-width: 10px;
+    border-radius: $radius-full;
+    flex-shrink: 0;
+  }
+
+  &__legend-name {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $color-text-primary;
+  }
+
+  &__stats {
+    @include flex(row, center, flex-start, 0);
+    background: $bg-selected;
+    border-radius: $radius-sm;
+    padding: $space-2 $space-3;
+    margin-top: auto;
+  }
+
+  &__stat {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__stat-label {
+    font-size: $font-size-nav;
+    font-weight: $font-weight-medium;
+    color: $color-text-secondary;
+  }
+
+  &__stat-value {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-bold;
+    color: $color-text-primary;
+  }
+
+  &__stat-divider {
+    width: 1px;
+    height: 28px;
+    background: $color-border;
+    margin: 0 $space-3;
+    flex-shrink: 0;
+  }
+}

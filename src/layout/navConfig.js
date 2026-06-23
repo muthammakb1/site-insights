@@ -1,13 +1,10 @@
 import {
   LayoutDashboard,
   BarChart3,
-  Funnel,
   Search,
   Network,
   Calculator,
   Newspaper,
-  ShieldCheck,
-  FileBarChart,
   Settings,
   LogOut,
 } from 'lucide-react';
@@ -26,13 +23,6 @@ export const NAV_ITEMS = [
     Icon:     BarChart3,
     title:    'Traffic Overview',
     subtitle: 'Understand your website traffic performance',
-  },
-  {
-    id:       'funnels',
-    label:    'Funnels',
-    Icon:     Funnel,
-    title:    'Funnels',
-    subtitle: 'Analyse your conversion funnels',
   },
   {
     id:       'search-insights',
@@ -61,20 +51,6 @@ export const NAV_ITEMS = [
     Icon:     Newspaper,
     title:    'Blogs Performance',
     subtitle: 'Track engagement and reach across blog content',
-  },
-  {
-    id:       'experience-health',
-    label:    'Experience Health',
-    Icon:     ShieldCheck,
-    title:    'Experience Health',
-    subtitle: 'Monitor site experience and Core Web Vitals',
-  },
-  {
-    id:       'reports',
-    label:    'Reports',
-    Icon:     FileBarChart,
-    title:    'Reports',
-    subtitle: 'Download and schedule analytics reports',
   },
   {
     id:       'settings',

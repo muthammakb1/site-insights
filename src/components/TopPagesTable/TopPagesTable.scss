@@ -54,6 +54,7 @@
   .data-table-wrap {
     max-height: 208px;  // >1366px: header 34px + 5×35px − 1 = 208px
     overflow-y: auto;
+    border-bottom: none;
     scrollbar-width: thin;
     scrollbar-color: $si-gray-300 transparent;
 

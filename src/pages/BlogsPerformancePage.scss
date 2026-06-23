@@ -1,0 +1,169 @@
+@use '../styles/abstracts/variables' as *;
+@use '../styles/abstracts/mixins' as *;
+
+.blogs-page {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-5;
+  align-items: start;
+
+  // ── Card wrapper ────────────────────────────────────────────────────────────
+  &__section {
+    @include card-surface;
+    padding: $space-3;
+  }
+
+  // ── Section header ──────────────────────────────────────────────────────────
+  &__header {
+    @include flex(row, center, flex-start, $space-2);
+    margin-bottom: $space-3;
+  }
+
+  &__icon-wrap {
+    @include flex(row, center, center, 0);
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    border-radius: $radius-sm;
+    flex-shrink: 0;
+  }
+
+  &__title {
+    font-size: $font-size-section;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+    margin: 0;
+
+    @media (max-width: 1366px) { font-size: $font-size-sm; }
+    @media (max-width: 1280px) { font-size: $font-size-table; }
+  }
+
+  // ── Rank badge (numbered circle) ────────────────────────────────────────────
+  &__rank {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    border-radius: $radius-full;
+    background-color: $si-primary-700;
+    color: #fff;
+    font-size: 10px;
+    font-weight: $font-weight-semibold;
+  }
+
+  // ── Category chip ───────────────────────────────────────────────────────────
+  &__badge {
+    display: inline-block;
+    padding: 2px $space-2;
+    border-radius: $radius-full;
+    font-size: 10px;
+    font-weight: $font-weight-medium;
+    white-space: nowrap;
+  }
+
+  // ── Category name (no wrap) ─────────────────────────────────────────────────
+  &__cat-name-text {
+    white-space: nowrap;
+  }
+
+  // ── Horizontal visit bar ────────────────────────────────────────────────────
+  &__bar-cell {
+    @include flex(row, center, flex-start, $space-2);
+    min-width: 60px;
+  }
+
+  &__bar {
+    display: block;
+    height: 6px;
+    border-radius: $radius-full;
+    background: $si-primary-700;
+    flex-shrink: 0;
+    min-width: 2px;
+    transform-origin: left center;
+    animation: bar-grow 0.5s ease-out both;
+  }
+
+  // ── Pin visits & conversion columns to minimum width in categories table ────
+  &__section--categories {
+    .data-table__th:nth-child(2),
+    .data-table__td:nth-child(2),
+    .data-table__th:nth-child(3),
+    .data-table__td:nth-child(3),
+    .data-table__th:nth-child(4),
+    .data-table__td:nth-child(4) {
+      width: 1%;
+      white-space: nowrap;
+    }
+  }
+
+  @keyframes bar-grow {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+  }
+
+  // Stagger each row's bar by 60 ms
+  @for $i from 1 through 10 {
+    .data-table__body .data-table__row:nth-child(#{$i}) .blogs-page__bar {
+      animation-delay: #{($i - 1) * 60}ms;
+    }
+  }
+
+  &__bar-label {
+    font-size: $font-size-table;
+    color: $color-text-secondary;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  // ── Title cell — single line with ellipsis ──────────────────────────────────
+  &__title-cell {
+    display: block;
+    max-width: 200px;
+    @include truncate;
+    font-weight: $font-weight-regular;
+    color: $color-text-primary;
+  }
+
+  // ── Table overrides ─────────────────────────────────────────────────────────
+  .data-table__head {
+    background-color: $bg-selected;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+
+  .data-table__td {
+    padding: $space-3 $space-3;
+    line-height: 1.5;
+    font-weight: $font-weight-regular;
+  }
+
+  // Narrow the rank column
+  .data-table__th:first-child,
+  .data-table__td:first-child {
+    width: 32px;
+    min-width: 32px;
+  }
+
+  @media (max-width: 1366px) {
+    .data-table {
+      font-size: $font-size-nav;
+
+      &__th { font-size: 10px; padding: $space-1 $space-2; }
+      &__td { padding: $space-2 $space-2; }
+    }
+
+    &__title-cell { max-width: 160px; }
+    &__rank { width: 18px; height: 18px; font-size: 9px; }
+  }
+
+  @media (max-width: 1280px) {
+    .data-table {
+      font-size: 11px;
+      &__th { font-size: 9px; }
+    }
+  }
+}
