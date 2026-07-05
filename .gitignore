@@ -9,6 +9,9 @@ dist/
 .env.local
 .env.*.local
 
+# netlify
+.netlify/
+
 # logs
 *.log
 npm-debug.log*

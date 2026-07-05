@@ -50,7 +50,7 @@ module.exports = {
     }),
     // Static replacement for our own process.env.* references at build time.
     new webpack.EnvironmentPlugin({
-      REACT_APP_API_BASE_URL:    'http://localhost:4000',
+      REACT_APP_API_BASE_URL:    'http://localhost:9999',
       REACT_APP_REPORT_SUITE_ID: 'mock-report-suite',
     }),
   ],
