@@ -6,8 +6,8 @@
     "dev": "webpack serve --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
     "lint": "eslint src --ext .js,.jsx",
-    "predeploy": "cross-env REACT_APP_API_BASE_URL=https://site-insights-demo.netlify.app REACT_APP_REPORT_SUITE_ID=apaintasrpprod npm run build",
-    "deploy": "gh-pages -d dist"
+    "predeploy": "cross-env REACT_APP_API_BASE_URL=https://site-insights-demo.netlify.app REACT_APP_REPORT_SUITE_ID=apaintasrpprod npm run build && node -e \"require('fs').writeFileSync('dist/.nojekyll', '')\"",
+    "deploy": "gh-pages -d dist --dotfiles"
   },
   "homepage": "https://muthammakb1.github.io/site-insights",
   "dependencies": {
