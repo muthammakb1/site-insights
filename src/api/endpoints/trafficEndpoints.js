@@ -1,59 +1,101 @@
+/**
+ * RTK Query endpoints for traffic metrics.
+ *
+ * Every `query` here builds an Adobe Reporting API 2.0 request body via
+ * buildReportQuery() and POSTs it to '/reports'. That path is relative to
+ * adobeAnalyticsApi's baseUrl, which resolves to the Netlify Function proxy
+ * — not Adobe directly (see adobeAnalyticsApi.js for why).
+ */
 import { buildReportQuery } from '@utils/adobeQueryBuilder';
 
-/**
- * Injects traffic-related endpoints into the base API slice.
- * Each endpoint takes { dateRange, reportSuiteId } as its query arg so that
- * RTK Query re-fetches automatically when the global date range changes.
- */
+// Order here must match the `metrics` order passed to buildReportQuery in
+// getTrafficOverview below — Adobe returns one row of positional values with
+// no field names, so this array is what maps each position back to a key.
+const OVERVIEW_METRIC_KEYS = ['pageviews', 'visitors', 'visits', 'entries', 'exits', 'bounces'];
+
 export function injectTrafficEndpoints(baseApi) {
   return baseApi.injectEndpoints({
     endpoints: (builder) => ({
+      // Single-row summary of the 6 headline traffic metrics, site-wide (no
+      // dimension/search scoping — previously restricted to the homepage
+      // only via an evar6 dimension + search clause, removed to report
+      // whole-site totals instead).
+      //
+      // Currently used on two routed pages (see PageRouter.jsx):
+      //   - Executive Summary page, via src/features/kpiCards/KpiCards.jsx
+      //   - Traffic Overview page, called directly in
+      //     src/pages/TrafficOverviewPage.jsx
       getTrafficOverview: builder.query({
-        query: ({ dateRange, reportSuiteId }) => ({
-          url: '/reports',
+        query: ({ dateRange }) => ({
+          url:    '/reports',
           method: 'POST',
-          body: buildReportQuery({
-            reportSuiteId,
+          body:   buildReportQuery({
             dateRange,
-            metrics: ['visits', 'pageviews', 'uniqueVisitors', 'bounceRate'],
-            dimensions: [],
+            metrics: ['pageviews', 'visitors', 'visits', 'entries', 'exits', 'bounces'],
+            includeSettings: false,
           }),
         }),
         providesTags: ['Traffic'],
-        // Mock: when running without a backend, return stub data
-        transformResponse: (response) => response ?? TRAFFIC_OVERVIEW_MOCK,
+        // Without a `dimension`, Adobe omits `rows` entirely and returns
+        // totals in summaryData.totals instead — a positional array in the
+        // same order as the `metrics` above, which we zip with
+        // OVERVIEW_METRIC_KEYS.
+        transformResponse: (response) => {
+          const totals = response?.summaryData?.totals;
+          if (!totals) return null;
+          return Object.fromEntries(
+            OVERVIEW_METRIC_KEYS.map((key, i) => [key, Math.round(totals[i] ?? 0)])
+          );
+        },
       }),
 
+      // Time series of visits/pageviews for the trend chart. `granularity`
+      // is passed straight through as the Adobe dimension id, since Adobe's
+      // day/week/month dimension ids happen to match our own naming.
+      //
+      // Only consumed by src/features/trafficOverview/TrafficOverview.jsx
+      // (note: this is a different component from src/pages/TrafficOverviewPage.jsx
+      // above — easy to mix up the two). That feature component isn't
+      // currently imported/rendered by any page in PageRouter.jsx, so this
+      // endpoint isn't live on the dashboard yet.
       getTrafficTrend: builder.query({
-        query: ({ dateRange, reportSuiteId, granularity = 'day' }) => ({
-          url: '/reports',
+        query: ({ dateRange, granularity = 'day' }) => ({
+          url:    '/reports',
           method: 'POST',
-          body: buildReportQuery({
-            reportSuiteId,
+          body:   buildReportQuery({
             dateRange,
-            metrics: ['visits', 'pageviews'],
-            dimensions: [granularity],
+            metrics:   ['visits', 'pageviews'],
+            dimension: granularity,
           }),
         }),
         providesTags: ['Traffic'],
-        transformResponse: (response) => response ?? TRAFFIC_TREND_MOCK,
+        transformResponse: (response) => response ?? null,
       }),
     }),
     overrideExisting: false,
   });
 }
 
-// ─── Mock data (used when the backend proxy is not running) ───────────────────
+// ─── Mock data ──────────────────────────────────────────────────────────────
+// Not currently wired into the endpoints above (nothing references these
+// constants) — kept as reference shapes for offline/demo use. If you want a
+// working "no API key" mode, wire these in as a fallback in
+// transformResponse, the way CONVERSION_RATE_MOCK is used in
+// conversionEndpoints.js.
 
 const TRAFFIC_OVERVIEW_MOCK = {
-  totals: { visits: 142_850, pageviews: 487_320, uniqueVisitors: 98_441, bounceRate: 0.382 },
-  previousPeriod: { visits: 131_204, pageviews: 452_100, uniqueVisitors: 89_230, bounceRate: 0.401 },
+  pageviews: 487320,
+  visitors:   98441,
+  visits:    142850,
+  entries:   120000,
+  exits:      95000,
+  bounces:    54000,
 };
 
 const TRAFFIC_TREND_MOCK = {
   rows: Array.from({ length: 30 }, (_, i) => ({
-    date: new Date(Date.now() - (29 - i) * 86_400_000).toISOString().slice(0, 10),
-    visits: Math.floor(3_500 + Math.random() * 2_500),
+    date:      new Date(Date.now() - (29 - i) * 86_400_000).toISOString().slice(0, 10),
+    visits:    Math.floor(3_500 + Math.random() * 2_500),
     pageviews: Math.floor(12_000 + Math.random() * 6_000),
   })),
 };
