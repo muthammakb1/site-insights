@@ -51,6 +51,14 @@
     margin-top: $space-1;
   }
 
+  &__value-shimmer {
+    @include shimmer;
+    width: 3.5em;
+    height: clamp(14px, 1.6vw, 20px);
+    margin-top: $space-1;
+    border-radius: $radius-sm;
+  }
+
   &__spark {
     margin-top: auto;
     margin-bottom: $space-2;

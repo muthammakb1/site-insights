@@ -67,16 +67,15 @@ const TOP_PAGES_COLUMNS = [
 
 export function TrafficOverviewPage() {
   const { queryArgs } = useDateRange();
-  const { data } = useGetTrafficOverviewQuery(queryArgs);
+  const { data, isFetching } = useGetTrafficOverviewQuery(queryArgs);
 
   return (
     <>
       <section className="kpi-cards" aria-label="Traffic overview metrics">
         {TRAFFIC_KPIS.map((kpi) => {
-          const value = kpi.id === 'visits'
-            ? (data?.visits != null ? formatCompact(data.visits) : '--')
-            : kpi.value;
-          return <KpiCard key={kpi.id} {...kpi} value={value} />;
+          if (kpi.id !== 'visits') return <KpiCard key={kpi.id} {...kpi} />;
+          const value = data?.visits != null ? formatCompact(data.visits) : '--';
+          return <KpiCard key={kpi.id} {...kpi} value={value} loading={isFetching} />;
         })}
       </section>
       <div className="traffic-overview__charts">

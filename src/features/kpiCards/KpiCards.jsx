@@ -39,7 +39,7 @@ const ICON_COLORS = {
   'search-users':           { bg: '#FFFBEB', color: '#D97706' },
 };
 
-export function KpiCard({ id, label, value, Icon: IconProp }) {
+export function KpiCard({ id, label, value, Icon: IconProp, loading }) {
   const Icon = IconProp ?? ICON_MAP[id];
   const iconStyle = ICON_COLORS[id] ?? {};
 
@@ -52,7 +52,9 @@ export function KpiCard({ id, label, value, Icon: IconProp }) {
         <span className="kpi-card__label">{label}</span>
       </div>
 
-      <p className="kpi-card__value">{value}</p>
+      {loading
+        ? <div className="kpi-card__value-shimmer" aria-hidden="true" />
+        : <p className="kpi-card__value">{value}</p>}
 
       <div className="kpi-card__spark" aria-hidden="true">
         <img src={sparklineImg} alt="" />
@@ -63,15 +65,14 @@ export function KpiCard({ id, label, value, Icon: IconProp }) {
 
 export function KpiCards() {
   const { queryArgs } = useDateRange();
-  const { data } = useGetTrafficOverviewQuery(queryArgs);
+  const { data, isFetching } = useGetTrafficOverviewQuery(queryArgs);
 
   return (
     <section className="kpi-cards" aria-label="Key performance indicators">
       {KPI_DATA.map((kpi) => {
-        const value = kpi.id === 'visits'
-          ? (data?.visits != null ? formatCompact(data.visits) : '--')
-          : kpi.value;
-        return <KpiCard key={kpi.id} {...kpi} value={value} />;
+        if (kpi.id !== 'visits') return <KpiCard key={kpi.id} {...kpi} />;
+        const value = data?.visits != null ? formatCompact(data.visits) : '--';
+        return <KpiCard key={kpi.id} {...kpi} value={value} loading={isFetching} />;
       })}
     </section>
   );
