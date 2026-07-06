@@ -2,35 +2,34 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useDebouncedValue } from './useDebouncedValue';
 import {
   selectDateRange,
-  selectReportSuiteId,
   setDateRange,
   setPreset,
-  setReportSuite,
 } from '@features/dateRange/dateRangeSlice';
 import { DEBOUNCE_MS } from '@utils/constants';
 
 /**
- * Convenience hook that returns the debounced date range and report suite
- * ready to pass directly as RTK Query hook arguments.
+ * Returns the date range from Redux (live + debounced) and action dispatchers.
  *
- * Also exposes action dispatchers so components don't need to import the slice.
+ * Usage in any component that calls an API:
+ *   const { queryArgs } = useDateRange();
+ *   const { data } = useGetTrafficOverviewQuery(queryArgs);
+ *
+ * queryArgs = { dateRange: { startDate, endDate } }
+ * buildReportQuery formats this into "YYYY-MM-DDTHH:mm:ss.SSS/YYYY-MM-DDTHH:mm:ss.SSS"
  */
 export function useDateRange() {
-  const dispatch    = useDispatch();
-  const dateRange   = useSelector(selectDateRange);
-  const reportSuiteId = useSelector(selectReportSuiteId);
+  const dispatch  = useDispatch();
+  const dateRange = useSelector(selectDateRange);
 
-  // Debounce prevents a burst of API calls while the user drags a date picker.
+  // Debounce prevents a burst of API calls while the user types a custom date.
   const debouncedDateRange = useDebouncedValue(dateRange, DEBOUNCE_MS);
 
   return {
     dateRange,
     debouncedDateRange,
-    reportSuiteId,
-    // Query args object — spread directly into any RTK Query hook
-    queryArgs: { dateRange: debouncedDateRange, reportSuiteId },
+    // Spread directly into any RTK Query hook argument
+    queryArgs: { dateRange: debouncedDateRange },
     setDateRange: (startDate, endDate) => dispatch(setDateRange({ startDate, endDate })),
     setPreset:    (preset) => dispatch(setPreset(preset)),
-    setReportSuite: (id) => dispatch(setReportSuite(id)),
   };
 }

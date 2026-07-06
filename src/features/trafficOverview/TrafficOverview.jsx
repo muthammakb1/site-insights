@@ -68,8 +68,10 @@ export function TrafficOverview() {
     }));
   }, [trendQuery.data]);
 
-  const totals   = overviewQuery.data?.totals;
-  const previous = overviewQuery.data?.previousPeriod;
+  const totals = overviewQuery.data;
+  const bounceRate = totals?.bounces != null && totals?.visits
+    ? totals.bounces / totals.visits
+    : null;
 
   return (
     <section className="traffic-overview" aria-labelledby="traffic-heading" id="traffic">
@@ -78,14 +80,12 @@ export function TrafficOverview() {
       {/* KPI tiles */}
       <div className="traffic-overview__stats">
         <ChartWrapper isLoading={overviewQuery.isLoading} isError={overviewQuery.isError} height={80}>
-          {totals && (
-            <>
-              <StatTile label="Visits"          value={formatCompact(totals.visits)}         previous={previous?.visits} />
-              <StatTile label="Pageviews"        value={formatCompact(totals.pageviews)}       previous={previous?.pageviews} />
-              <StatTile label="Unique Visitors"  value={formatCompact(totals.uniqueVisitors)}  previous={previous?.uniqueVisitors} />
-              <StatTile label="Bounce Rate"      value={formatPercent(totals.bounceRate)}       previous={previous?.bounceRate} lowerIsBetter />
-            </>
-          )}
+          <>
+            <StatTile label="Visits"          value={totals?.visits    != null ? formatCompact(totals.visits)    : '--'} />
+            <StatTile label="Pageviews"       value={totals?.pageviews != null ? formatCompact(totals.pageviews) : '--'} />
+            <StatTile label="Unique Visitors" value={totals?.visitors  != null ? formatCompact(totals.visitors)  : '--'} />
+            <StatTile label="Bounce Rate"     value={bounceRate        != null ? formatPercent(bounceRate)       : '--'} />
+          </>
         </ChartWrapper>
       </div>
 

@@ -24,7 +24,9 @@ export function UserIntentCard() {
     <div className="user-intent-card">
       <div className="user-intent-card__title-row">
         <h2 className="user-intent-card__title">User Intent Distribution</h2>
-        <Info size={15} className="user-intent-card__info-icon" />
+        <span className="user-intent-card__info-wrap" data-tooltip="Traffic and conversions by user intent type">
+          <Info size={15} className="user-intent-card__info-icon" aria-hidden="true" />
+        </span>
         <div className="user-intent-card__legend">
           <span className="user-intent-card__legend-item">
             <span className="user-intent-card__dot user-intent-card__dot--traffic" />

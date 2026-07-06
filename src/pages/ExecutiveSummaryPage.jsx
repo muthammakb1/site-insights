@@ -30,6 +30,7 @@ export function ExecutiveSummaryPage() {
           statLabel="Total Logins"
           statValue="128K"
           chartData={LOGIN_DATA}
+          tooltipText="Total users logged in to the asianpaints website"
         />
 
         <LoginDataCard
@@ -39,6 +40,7 @@ export function ExecutiveSummaryPage() {
           statLabel="Total Downloads"
           statValue="765K"
           chartData={DOWNLOAD_DATA}
+          tooltipText="Total number of app downloads across Android and iOS platforms"
         />
       </div>
 

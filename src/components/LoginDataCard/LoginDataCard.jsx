@@ -24,7 +24,7 @@ function SliceLabel({ cx, cy, midAngle, innerRadius, outerRadius, value }) {
   );
 }
 
-export function LoginDataCard({ title, icon: Icon, iconStyle, statLabel, statValue, chartTitle, chartData }) {
+export function LoginDataCard({ title, icon: Icon, iconStyle, statLabel, statValue, chartTitle, chartData, tooltipText }) {
   return (
     <div className="login-data-card">
       <div className="login-data-card__title-row">
@@ -32,7 +32,9 @@ export function LoginDataCard({ title, icon: Icon, iconStyle, statLabel, statVal
           <Icon size={14} strokeWidth={1.75} />
         </span>
         <h2 className="login-data-card__title">{title}</h2>
-        <Info size={15} className="login-data-card__info-icon" />
+        <span className="login-data-card__info-wrap" data-tooltip={tooltipText}>
+          <Info size={15} className="login-data-card__info-icon" aria-hidden="true" />
+        </span>
       </div>
 
       <div className="login-data-card__body">

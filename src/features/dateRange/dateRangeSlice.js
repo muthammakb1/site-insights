@@ -6,8 +6,6 @@ const today = dayjs();
 const initialState = {
   startDate: today.subtract(30, 'day').format('YYYY-MM-DD'),
   endDate:   today.format('YYYY-MM-DD'),
-  // Which Adobe report suite is active
-  reportSuiteId: process.env.REACT_APP_REPORT_SUITE_ID || 'mock-report-suite',
 };
 
 const dateRangeSlice = createSlice({
@@ -17,9 +15,6 @@ const dateRangeSlice = createSlice({
     setDateRange(state, action) {
       state.startDate = action.payload.startDate;
       state.endDate   = action.payload.endDate;
-    },
-    setReportSuite(state, action) {
-      state.reportSuiteId = action.payload;
     },
     setPreset(state, action) {
       const today = dayjs();
@@ -45,12 +40,11 @@ const dateRangeSlice = createSlice({
   },
 });
 
-export const { setDateRange, setReportSuite, setPreset } = dateRangeSlice.actions;
+export const { setDateRange, setPreset } = dateRangeSlice.actions;
 
 // Selectors
-export const selectDateRange    = (state) => state.dateRange;
-export const selectStartDate    = (state) => state.dateRange.startDate;
-export const selectEndDate      = (state) => state.dateRange.endDate;
-export const selectReportSuiteId = (state) => state.dateRange.reportSuiteId;
+export const selectDateRange = (state) => state.dateRange;
+export const selectStartDate = (state) => state.dateRange.startDate;
+export const selectEndDate   = (state) => state.dateRange.endDate;
 
 export default dateRangeSlice.reducer;

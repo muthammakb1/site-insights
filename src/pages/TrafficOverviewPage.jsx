@@ -3,6 +3,9 @@ import { KpiCard } from '@features/kpiCards/KpiCards';
 import { DonutChartCard } from '@components/DonutChartCard/DonutChartCard';
 import { TopPagesTable } from '@components/TopPagesTable/TopPagesTable';
 import { TopCitiesMap } from '@components/TopCitiesMap/TopCitiesMap';
+import { useGetTrafficOverviewQuery } from '@api/adobeAnalyticsApi';
+import { useDateRange } from '@hooks/useDateRange';
+import { formatCompact } from '@utils/formatters';
 import '@features/kpiCards/kpiCards.scss';
 import './TrafficOverviewPage.scss';
 
@@ -63,12 +66,18 @@ const TOP_PAGES_COLUMNS = [
 ];
 
 export function TrafficOverviewPage() {
+  const { queryArgs } = useDateRange();
+  const { data } = useGetTrafficOverviewQuery(queryArgs);
+
   return (
     <>
       <section className="kpi-cards" aria-label="Traffic overview metrics">
-        {TRAFFIC_KPIS.map((kpi) => (
-          <KpiCard key={kpi.id} {...kpi} />
-        ))}
+        {TRAFFIC_KPIS.map((kpi) => {
+          const value = kpi.id === 'visits'
+            ? (data?.visits != null ? formatCompact(data.visits) : '--')
+            : kpi.value;
+          return <KpiCard key={kpi.id} {...kpi} value={value} />;
+        })}
       </section>
       <div className="traffic-overview__charts">
         <DonutChartCard title="Traffic by Channel" data={CHANNEL_DATA} />

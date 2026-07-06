@@ -2,7 +2,7 @@ import { Download } from 'lucide-react';
 import { DateRangePicker } from '@features/dateRange/DateRangePicker';
 import './Header.scss';
 
-export function Header({ title, subtitle }) {
+export function Header({ title, subtitle, onDownload }) {
   return (
     <header className="header">
       {/* Left — product name + page title + subtitle */}
@@ -15,7 +15,7 @@ export function Header({ title, subtitle }) {
       {/* Right — date picker + download */}
       <div className="header__controls">
         <DateRangePicker />
-        <button type="button" className="header__download-btn">
+        <button type="button" className="header__download-btn" onClick={onDownload}>
           <Download size={15} strokeWidth={2} />
           Download Report
         </button>
