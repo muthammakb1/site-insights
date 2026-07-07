@@ -5,7 +5,7 @@ import { TopPagesTable } from '@components/TopPagesTable/TopPagesTable';
 import { TopCitiesMap } from '@components/TopCitiesMap/TopCitiesMap';
 import { useGetTrafficOverviewQuery } from '@api/adobeAnalyticsApi';
 import { useDateRange } from '@hooks/useDateRange';
-import { formatCompact } from '@utils/formatters';
+import { formatCompact, formatPercent } from '@utils/formatters';
 import '@features/kpiCards/kpiCards.scss';
 import './TrafficOverviewPage.scss';
 
@@ -65,6 +65,15 @@ const TOP_PAGES_COLUMNS = [
   { key: 'bounceRate',  label: 'Bounce Rate' },
 ];
 
+// Maps a KPI tile id to how its live value is derived from
+// getTrafficOverview's response. Returns undefined (-> '--') when the
+// fields it needs aren't available yet.
+const LIVE_KPI_VALUE = {
+  'visits':          (data) => data?.visits != null ? formatCompact(data.visits) : undefined,
+  'unique-visitors': (data) => data?.visitors != null ? formatCompact(data.visitors) : undefined,
+  'bounce-rate':     (data) => data?.entries ? formatPercent(data.bounces / data.entries) : undefined,
+};
+
 export function TrafficOverviewPage() {
   const { queryArgs } = useDateRange();
   const { data, isFetching } = useGetTrafficOverviewQuery(queryArgs);
@@ -73,8 +82,9 @@ export function TrafficOverviewPage() {
     <>
       <section className="kpi-cards" aria-label="Traffic overview metrics">
         {TRAFFIC_KPIS.map((kpi) => {
-          if (kpi.id !== 'visits') return <KpiCard key={kpi.id} {...kpi} />;
-          const value = data?.visits != null ? formatCompact(data.visits) : '--';
+          const computeValue = LIVE_KPI_VALUE[kpi.id];
+          if (!computeValue) return <KpiCard key={kpi.id} {...kpi} />;
+          const value = computeValue(data) ?? '--';
           return <KpiCard key={kpi.id} {...kpi} value={value} loading={isFetching} />;
         })}
       </section>

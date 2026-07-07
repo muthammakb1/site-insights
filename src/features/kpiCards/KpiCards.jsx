@@ -9,7 +9,7 @@ import {
 import sparklineImg from '@assets/images/sparkline.svg';
 import { useGetTrafficOverviewQuery } from '@api/adobeAnalyticsApi';
 import { useDateRange } from '@hooks/useDateRange';
-import { formatCompact } from '@utils/formatters';
+import { formatCompact, formatPercent } from '@utils/formatters';
 import { KPI_DATA } from './kpiMockData';
 import './kpiCards.scss';
 
@@ -63,6 +63,17 @@ export function KpiCard({ id, label, value, Icon: IconProp, loading }) {
   );
 }
 
+// Maps a KPI tile id to how its live value is derived from
+// getTrafficOverview's response. Returns undefined (-> '--') when the
+// fields it needs aren't available yet.
+const LIVE_KPI_VALUE = {
+  'visits':          (data) => data?.visits != null ? formatCompact(data.visits) : undefined,
+  'unique-visitors': (data) => data?.visitors != null ? formatCompact(data.visitors) : undefined,
+  'leads':           (data) => data?.event9 != null ? formatCompact(data.event9) : undefined,
+  'conversion-rate': (data) => data?.visits ? formatPercent(data.event9 / data.visits) : undefined,
+  'bounce-rate':     (data) => data?.entries ? formatPercent(data.bounces / data.entries) : undefined,
+};
+
 export function KpiCards() {
   const { queryArgs } = useDateRange();
   const { data, isFetching } = useGetTrafficOverviewQuery(queryArgs);
@@ -70,8 +81,9 @@ export function KpiCards() {
   return (
     <section className="kpi-cards" aria-label="Key performance indicators">
       {KPI_DATA.map((kpi) => {
-        if (kpi.id !== 'visits') return <KpiCard key={kpi.id} {...kpi} />;
-        const value = data?.visits != null ? formatCompact(data.visits) : '--';
+        const computeValue = LIVE_KPI_VALUE[kpi.id];
+        if (!computeValue) return <KpiCard key={kpi.id} {...kpi} />;
+        const value = computeValue(data) ?? '--';
         return <KpiCard key={kpi.id} {...kpi} value={value} loading={isFetching} />;
       })}
     </section>

@@ -51,12 +51,34 @@
     margin-top: $space-1;
   }
 
+  // Solid base + a light sweep passing over it — the shared @shimmer mixin's
+  // gray-50/gray-100 gradient is too low-contrast to read at this size.
   &__value-shimmer {
-    @include shimmer;
+    position: relative;
+    overflow: hidden;
     width: 3.5em;
     height: clamp(14px, 1.6vw, 20px);
     margin-top: $space-1;
     border-radius: $radius-sm;
+    background-color: $si-gray-200;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.75),
+        transparent
+      );
+      animation: kpi-value-shimmer-sweep 1.4s ease-in-out infinite;
+    }
+
+    @keyframes kpi-value-shimmer-sweep {
+      0%   { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
   }
 
   &__spark {

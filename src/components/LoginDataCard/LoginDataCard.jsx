@@ -47,14 +47,14 @@ export function LoginDataCard({ title, icon: Icon, iconStyle, statLabel, statVal
           {chartTitle && <p className="login-data-card__chart-title">{chartTitle}</p>}
           <div className="login-data-card__chart-body">
             <div className="login-data-card__chart-wrap">
-              <PieChart width={130} height={130}>
+              <PieChart width={116} height={116}>
                 <Pie
                   data={chartData}
                   dataKey="pct"
                   cx="50%"
                   cy="50%"
-                  innerRadius={38}
-                  outerRadius={62}
+                  innerRadius={34}
+                  outerRadius={56}
                   startAngle={90}
                   endAngle={-270}
                   labelLine={false}

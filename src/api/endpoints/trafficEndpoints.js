@@ -11,7 +11,39 @@ import { buildReportQuery } from '@utils/adobeQueryBuilder';
 // Order here must match the `metrics` order passed to buildReportQuery in
 // getTrafficOverview below — Adobe returns one row of positional values with
 // no field names, so this array is what maps each position back to a key.
-const OVERVIEW_METRIC_KEYS = ['pageviews', 'visitors', 'visits', 'entries', 'exits', 'bounces'];
+const OVERVIEW_METRIC_KEYS = [
+  'pageviews',
+  'visitors',
+  'visits',
+  'entries',
+  'exits',
+  'bounces',
+  'event9',
+  'event132',
+  'timespentvisit',
+  'timespentvisitor',
+  'mobileVisits',
+  'nonMobileVisits',
+  'overallFaqClicks',
+  'campaignFaqClick',
+  'downloadClick',
+  'videoPlayed',
+  'event301',
+  'event48',
+  'mobileLogins',
+  'nonMobileLogins',
+];
+
+// Segment definitions referenced by the `filters` entries on the metrics
+// below (mobile-phone vs. non-mobile-phone traffic/logins, and an FAQ-click
+// segment).
+const OVERVIEW_METRIC_FILTERS = [
+  { id: 'seg_mobile_phone_id', type: 'segment', segmentId: 's200000889_69660e058d4296479e9be08d' },
+  { id: 'seg_nonmobile_id',    type: 'segment', segmentId: 's200000889_69660e1ea6005a2f7804f32b' },
+  { id: 'seg_mobile_phone',    type: 'segment', segmentId: 's200000889_6a4b4df559314d1f94172735' },
+  { id: 'seg_nonmobile',       type: 'segment', segmentId: 's200000889_6a4b4e429879a70c95e90d03' },
+  { id: 'FAQs_click',          type: 'segment', segmentId: 's200000889_697327318864ef5c3c4f79f7' },
+];
 
 export function injectTrafficEndpoints(baseApi) {
   return baseApi.injectEndpoints({
@@ -31,7 +63,29 @@ export function injectTrafficEndpoints(baseApi) {
           method: 'POST',
           body:   buildReportQuery({
             dateRange,
-            metrics: ['pageviews', 'visitors', 'visits', 'entries', 'exits', 'bounces'],
+            metrics: [
+              'pageviews',
+              'visitors',
+              'visits',
+              'entries',
+              'exits',
+              'bounces',
+              'event9',
+              'event132',
+              'timespentvisit',
+              'timespentvisitor',
+              { id: 'visits',   filters: ['seg_mobile_phone_id'], name: 'Mobile Visits (Mobile Phone)' },
+              { id: 'visits',   filters: ['seg_nonmobile_id'],    name: 'Non-Mobile Visits (Not Mobile Phone)' },
+              { id: 'event143', filters: ['FAQs_click'],          name: 'Overall FAQs Click' },
+              { id: 'event136', name: 'Campaign FAQ Click' },
+              { id: 'event134', name: 'Download Click' },
+              { id: 'event20',  name: 'Video played' },
+              'event301',
+              'event48',
+              { id: 'event48', filters: ['seg_mobile_phone'], name: 'Mobile Logins(Mobile Phone)' },
+              { id: 'event48', filters: ['seg_nonmobile'],    name: 'Non-Mobile Logins (Not Mobile Phone)' },
+            ],
+            metricFilters: OVERVIEW_METRIC_FILTERS,
             includeSettings: false,
           }),
         }),
@@ -84,12 +138,26 @@ export function injectTrafficEndpoints(baseApi) {
 // conversionEndpoints.js.
 
 const TRAFFIC_OVERVIEW_MOCK = {
-  pageviews: 487320,
-  visitors:   98441,
-  visits:    142850,
-  entries:   120000,
-  exits:      95000,
-  bounces:    54000,
+  pageviews:         487320,
+  visitors:           98441,
+  visits:            142850,
+  entries:           120000,
+  exits:               95000,
+  bounces:             54000,
+  event9:               2650,
+  event132:             1840,
+  timespentvisit:        185,
+  timespentvisitor:      210,
+  mobileVisits:        98420,
+  nonMobileVisits:     44430,
+  overallFaqClicks:     3200,
+  campaignFaqClick:     1150,
+  downloadClick:        6400,
+  videoPlayed:          8900,
+  event301:              720,
+  event48:              5400,
+  mobileLogins:         3900,
+  nonMobileLogins:      1500,
 };
 
 const TRAFFIC_TREND_MOCK = {

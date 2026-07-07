@@ -104,7 +104,13 @@
     display: flex;
     flex-direction: column;
     gap: $space-2;
-    max-height: calc(5 * 40px + 4 * 8px);
+    // Caps the card's own natural height to ~5 rows so it doesn't force the
+    // grid row (and the shorter Login Data / App Downloads column next to
+    // it) taller than needed; flex + min-height:0 lets it still fill
+    // whatever height the stretched card ends up with, scrolling the rest.
+    max-height: calc(5 * 48px + 4 * 8px);
+    flex: 1;
+    min-height: 0;
     overflow-y: auto;
     padding-right: $space-1;
 

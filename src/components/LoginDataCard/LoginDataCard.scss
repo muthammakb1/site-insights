@@ -3,11 +3,13 @@
 
 .login-data-card {
   @include card-surface;
-  padding: $space-3;
+  // Trimmed from $space-3 to make room for a bigger chart below without
+  // growing the card's total height.
+  padding: $space-2;
 
   &__title-row {
     @include flex(row, center, flex-start, $space-2);
-    margin-bottom: $space-3;
+    margin-bottom: $space-1;
   }
 
   &__title {
@@ -71,7 +73,7 @@
   }
 
   &__body {
-    @include flex(row, center, flex-start, $space-5);
+    @include flex(row, center, flex-start, $space-4);
   }
 
   &__icon-wrap {

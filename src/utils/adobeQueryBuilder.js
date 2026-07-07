@@ -1,7 +1,12 @@
 /**
  * @param {object} opts
  * @param {{ startDate: string, endDate: string }} opts.dateRange  YYYY-MM-DD strings
- * @param {string[]} opts.metrics    e.g. ['pageviews', 'visitors']
+ * @param {(string|{id: string, name?: string, filters?: string[]})[]} opts.metrics
+ *   e.g. ['pageviews', 'visitors'], or an object for a named/segmented metric
+ *   e.g. { id: 'visits', filters: ['seg_mobile_phone_id'], name: 'Mobile Visits' }
+ *   — `filters` entries reference `id`s defined in opts.metricFilters.
+ * @param {object[]} [opts.metricFilters]  segment definitions referenced by
+ *   metrics[].filters, e.g. { id: 'seg_mobile_phone_id', type: 'segment', segmentId: '...' }
  * @param {string}   [opts.dimension]  e.g. 'evar6'  (single dimension variable name)
  * @param {number}   [opts.limit]    rows per page (default 10, ignored if includeSettings is false)
  * @param {number}   [opts.page]     0-indexed page (default 0, ignored if includeSettings is false)
@@ -16,6 +21,7 @@
 export function buildReportQuery({
   dateRange,
   metrics,
+  metricFilters,
   dimension,
   limit = 10,
   page  = 0,
@@ -33,7 +39,10 @@ export function buildReportQuery({
       },
     ],
     metricContainer: {
-      metrics: metrics.map((id) => ({ id: `metrics/${id}` })),
+      metrics: metrics.map((m) =>
+        typeof m === 'string' ? { id: `metrics/${m}` } : { ...m, id: `metrics/${m.id}` }
+      ),
+      ...(metricFilters && { metricFilters }),
     },
     ...(dimension && { dimension: `variables/${dimension}` }),
     ...(includeSettings && { settings: { limit, page } }),

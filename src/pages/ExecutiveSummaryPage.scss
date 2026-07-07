@@ -6,7 +6,14 @@
   grid-template-columns: repeat(3, 1fr);
   gap: $space-4;
 
-  &--full {
-    grid-template-columns: minmax(0, 48%);
+  &--intent {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+    align-items: stretch;
   }
+}
+
+.exec-summary__col {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
 }
