@@ -42,12 +42,12 @@ $sidebar-collapsed-width: 64px;
     transition: padding $transition-normal;
   }
 
-  &__logo-placeholder {
-    width: 32px;
-    height: 32px;
-    min-width: 32px;
-    border-radius: $radius-full;
-    background: linear-gradient(135deg, #FF5E1A 0%, #FF9F40 100%);
+  &__logo {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    border-radius: $radius-sm;
+    object-fit: contain;
   }
 
   &__brand-name {

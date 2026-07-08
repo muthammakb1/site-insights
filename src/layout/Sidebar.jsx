@@ -1,5 +1,6 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { NAV_ITEMS, LOGOUT_ITEM } from './navConfig';
+import apLogo from '@assets/images/ap-logo-1.png';
 import './Sidebar.scss';
 
 export function Sidebar({ activeId, onNavChange, collapsed, onToggleCollapse }) {
@@ -8,7 +9,7 @@ export function Sidebar({ activeId, onNavChange, collapsed, onToggleCollapse }) 
 
       {/* Brand */}
       <div className="sidebar__brand">
-        <div className="sidebar__logo-placeholder" aria-label="Site Insights logo" />
+        <img src={apLogo} alt="Asian Paints" className="sidebar__logo" />
         {!collapsed && <span className="sidebar__brand-name">asianpaints</span>}
       </div>
 
