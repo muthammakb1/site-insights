@@ -42,6 +42,14 @@ export function formatDate(isoString) {
   });
 }
 
+/** Seconds → "MM:SS"  e.g. 204 → "03:24" */
+export function formatDuration(seconds) {
+  const s = Math.round(seconds ?? 0);
+  const m = Math.floor(s / 60).toString().padStart(2, '0');
+  const r = (s % 60).toString().padStart(2, '0');
+  return `${m}:${r}`;
+}
+
 /** "2024-01-15" → "Jan 15" (short, for chart axes) */
 export function formatDateShort(isoString) {
   if (!isoString) return '';

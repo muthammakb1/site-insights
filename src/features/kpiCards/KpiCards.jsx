@@ -9,7 +9,7 @@ import {
 import sparklineImg from '@assets/images/sparkline.svg';
 import { useGetTrafficOverviewQuery } from '@api/adobeAnalyticsApi';
 import { useDateRange } from '@hooks/useDateRange';
-import { formatCompact, formatPercent } from '@utils/formatters';
+import { formatCompact, formatPercent, formatDuration } from '@utils/formatters';
 import { KPI_DATA } from './kpiMockData';
 import './kpiCards.scss';
 
@@ -72,6 +72,7 @@ const LIVE_KPI_VALUE = {
   'leads':           (data) => data?.event9 != null ? formatCompact(data.event9) : undefined,
   'conversion-rate': (data) => data?.visits ? formatPercent(data.event9 / data.visits) : undefined,
   'bounce-rate':     (data) => data?.entries ? formatPercent(data.bounces / data.entries) : undefined,
+  'avg-engagement':  (data) => data?.timespentvisitor != null ? formatDuration(data.timespentvisitor) : undefined,
 };
 
 export function KpiCards() {
